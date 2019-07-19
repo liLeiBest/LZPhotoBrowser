@@ -1,0 +1,16 @@
+PODS:
+  - LZPhotoBrower (0.0.4)
+
+DEPENDENCIES:
+  - LZPhotoBrower (from `../`)
+
+EXTERNAL SOURCES:
+  LZPhotoBrower:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LZPhotoBrower: e61f6daf2012e1dbdf498b56b6e5587507b1d394
+
+PODFILE CHECKSUM: 560611c4988feb234cddc5f9599f040c6855c42d
+
+COCOAPODS: 1.5.3
