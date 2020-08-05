@@ -1,10 +1,10 @@
 platform :ios, '9.0'
 use_frameworks!
 
-target 'LZPhotoBrower_Example' do
-  pod 'LZPhotoBrower', :path => '../'
+target 'LZPhotoBrowser_Example' do
+  pod 'LZPhotoBrowser', :path => '../'
 
-  target 'LZPhotoBrower_Tests' do
+  target 'LZPhotoBrowser_Tests' do
     inherit! :search_paths
 
   end

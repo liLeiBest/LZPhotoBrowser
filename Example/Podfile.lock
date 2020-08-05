@@ -1,16 +1,54 @@
 PODS:
-  - LZPhotoBrower (0.0.4)
+  - LZDependencyToolkit (1.8.5):
+    - LZDependencyToolkit/Category (= 1.8.5)
+    - LZDependencyToolkit/Define (= 1.8.5)
+    - LZDependencyToolkit/Object (= 1.8.5)
+    - LZDependencyToolkit/Struct (= 1.8.5)
+  - LZDependencyToolkit/Category (1.8.5):
+    - MJRefresh
+  - LZDependencyToolkit/Define (1.8.5)
+  - LZDependencyToolkit/Object (1.8.5)
+  - LZDependencyToolkit/Struct (1.8.5):
+    - LZDependencyToolkit/Struct/AppUnit (= 1.8.5)
+    - LZDependencyToolkit/Struct/CryptoUnit (= 1.8.5)
+    - LZDependencyToolkit/Struct/DeviceUnit (= 1.8.5)
+    - LZDependencyToolkit/Struct/QuickUnit (= 1.8.5)
+  - LZDependencyToolkit/Struct/AppUnit (1.8.5)
+  - LZDependencyToolkit/Struct/CryptoUnit (1.8.5)
+  - LZDependencyToolkit/Struct/DeviceUnit (1.8.5)
+  - LZDependencyToolkit/Struct/QuickUnit (1.8.5)
+  - LZPhotoBrowser (0.0.1):
+    - LZDependencyToolkit
+    - SDWebImage
+    - ZLPhotoBrowser
+  - MJRefresh (3.4.3)
+  - SDWebImage (5.8.4):
+    - SDWebImage/Core (= 5.8.4)
+  - SDWebImage/Core (5.8.4)
+  - ZLPhotoBrowser (3.2.0):
+    - SDWebImage
 
 DEPENDENCIES:
-  - LZPhotoBrower (from `../`)
+  - LZPhotoBrowser (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - LZDependencyToolkit
+    - MJRefresh
+    - SDWebImage
+    - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
-  LZPhotoBrower:
+  LZPhotoBrowser:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LZPhotoBrower: e61f6daf2012e1dbdf498b56b6e5587507b1d394
+  LZDependencyToolkit: 17fab4c9494e7e1a77f08adfcba5672f4885a068
+  LZPhotoBrowser: 7cdd806b5c239698bcb01c795d53cb0021e797ce
+  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
+  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
+  ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
 
-PODFILE CHECKSUM: 560611c4988feb234cddc5f9599f040c6855c42d
+PODFILE CHECKSUM: ac0c8366cc464398e9cfefb3ab7ef0011e053cfd
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.1

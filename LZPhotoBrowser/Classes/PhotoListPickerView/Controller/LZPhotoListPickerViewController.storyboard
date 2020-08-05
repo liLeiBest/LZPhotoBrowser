@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0uh-uc-aaj">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo List Picker View Controller-->
+        <scene sceneID="djO-1x-7Ve">
+            <objects>
+                <collectionViewController id="0uh-uc-aaj" customClass="LZPhotoListPickerViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" id="TaE-sP-Te4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewLayout key="collectionViewLayout" id="MNq-p3-rDU" customClass="LZPhotoListFlowLayout"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LZPhotoListCell" id="dKc-qh-1rE" customClass="LZPhotoListCell">
+                                <rect key="frame" x="73.5" y="0.0" width="267" height="271"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jHK-w2-Nn9">
+                                    <rect key="frame" x="0.0" y="0.0" width="267" height="271"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dak-N1-2Z3">
+                                            <rect key="frame" x="0.0" y="10" width="257" height="261"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVq-cY-yfH">
+                                            <rect key="frame" x="237" y="0.0" width="30" height="30"/>
+                                            <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="hs2-1I-niG"/>
+                                                <constraint firstAttribute="width" secondItem="qVq-cY-yfH" secondAttribute="height" multiplier="1:1" id="pus-ad-Wrv"/>
+                                            </constraints>
+                                            <connections>
+                                                <action selector="deleteDidTouch:" destination="dKc-qh-1rE" eventType="touchDown" id="ywO-Vf-I96"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="dak-N1-2Z3" secondAttribute="bottom" id="IYu-lb-vOR"/>
+                                        <constraint firstItem="qVq-cY-yfH" firstAttribute="top" secondItem="jHK-w2-Nn9" secondAttribute="top" id="KQP-N2-mII"/>
+                                        <constraint firstAttribute="trailing" secondItem="dak-N1-2Z3" secondAttribute="trailing" constant="10" id="Xij-8H-XIP"/>
+                                        <constraint firstAttribute="trailing" secondItem="qVq-cY-yfH" secondAttribute="trailing" id="nXB-cJ-F5H"/>
+                                        <constraint firstItem="dak-N1-2Z3" firstAttribute="leading" secondItem="jHK-w2-Nn9" secondAttribute="leading" id="vCN-P1-WjG"/>
+                                        <constraint firstItem="dak-N1-2Z3" firstAttribute="top" secondItem="jHK-w2-Nn9" secondAttribute="top" constant="10" id="xea-l4-lxs"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="267" height="271"/>
+                                <connections>
+                                    <outlet property="deleteBtn" destination="qVq-cY-yfH" id="HqN-gG-PRl"/>
+                                    <outlet property="imgView" destination="dak-N1-2Z3" id="Nnv-Rr-KcJ"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="0uh-uc-aaj" id="E9k-TV-nI5"/>
+                            <outlet property="delegate" destination="0uh-uc-aaj" id="ttG-ht-ca5"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bT6-QS-S9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-120.28985507246378" y="109.82142857142857"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,9 +1,9 @@
 {
   "name": "LZPhotoBrower",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "summary": "A short description of LZPhotoBrower..",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/liLeiBest/LZPhotoBrower",
+  "description": "图片浏览器：\n1.选择图片列表。\n2.图片展示宫格。",
+  "homepage": "https://github.com/liLeiBest",
   "license": "MIT",
   "authors": {
     "lilei": "lilei0502@139.com"
@@ -17,8 +17,32 @@
   "platforms": {
     "ios": "9.0"
   },
-  "frameworks": "Photos",
-  "source_files": "LZPhotoBrower/Classes/**/*",
+  "frameworks": [
+    "Foundation",
+    "UIKit",
+    "Photos"
+  ],
   "public_header_files": "LZPhotoBrower/Classes/**/*.h",
-  "prefix_header_contents": "#import \"LZPhotoUtility.h\""
+  "source_files": [
+    "LZPhotoBrower/Classes/**/*.{h,m}",
+    "LZPhotoBrower/Classes/PhotoListPickerView/**/*.storyboard",
+    ""
+  ],
+  "resource_bundles": {
+    "LZPhotoBrowerResourceBundle": [
+      "LZPhotoBrower/Classes/Resources/*"
+    ]
+  },
+  "dependencies": {
+    "LZDependencyToolkit": [
+
+    ],
+    "ZLPhotoBrowser": [
+
+    ],
+    "SDWebImage": [
+
+    ]
+  },
+  "prefix_header_contents": "static NSString * const LZPhotoBrowserBundle = @\"LZPhotoBrowerResourceBundle\";\n#import <LZDependencyToolkit/LZDependencyToolkit.h>"
 }

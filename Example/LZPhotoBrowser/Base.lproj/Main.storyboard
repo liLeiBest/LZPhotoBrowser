@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hxy-lt-0fK">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="X4z-59-fst">
+            <objects>
+                <viewController id="0Sb-lv-ePL" customClass="LZViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VgX-sX-YRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="9vs-LX-tp4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Efz-ze-Lgd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tjn-Mx-lI3">
+                                <rect key="frame" x="20" y="388" width="374" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qu-y9-oXh">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
+                                        <state key="normal" title="多张图片选择"/>
+                                        <connections>
+                                            <action selector="mutiPhotoesSelectDidTouch:" destination="0Sb-lv-ePL" eventType="touchDown" id="mHO-bd-bCr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3P-dm-3zQ">
+                                        <rect key="frame" x="0.0" y="30" width="374" height="30"/>
+                                        <state key="normal" title="单张图片选择"/>
+                                        <connections>
+                                            <action selector="singlePhotoSelectDidTouch:" destination="0Sb-lv-ePL" eventType="touchDown" id="GZ8-ke-Xw8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eD0-T8-XuC">
+                                        <rect key="frame" x="0.0" y="60" width="374" height="30"/>
+                                        <state key="normal" title="图片浏览"/>
+                                        <connections>
+                                            <action selector="photoesBrowseDidTouch:" destination="0Sb-lv-ePL" eventType="touchDown" id="Atz-sx-YJv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wK3-9d-0bm">
+                                        <rect key="frame" x="0.0" y="90" width="374" height="30"/>
+                                        <state key="normal" title="图片展示"/>
+                                        <connections>
+                                            <segue destination="Q8B-47-a1D" kind="show" id="whQ-i8-hjr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Tjn-Mx-lI3" secondAttribute="trailing" constant="20" id="MLb-0y-HnV"/>
+                            <constraint firstItem="Tjn-Mx-lI3" firstAttribute="centerY" secondItem="Efz-ze-Lgd" secondAttribute="centerY" id="nE0-a1-WvH"/>
+                            <constraint firstItem="Tjn-Mx-lI3" firstAttribute="leading" secondItem="Efz-ze-Lgd" secondAttribute="leading" constant="20" id="x0M-nS-dLa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GeT-Hn-38s"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6z6-fC-1Sc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2183.1999999999998" y="432.23388305847078"/>
+        </scene>
+        <!--Photo List Browse View Controller-->
+        <scene sceneID="bbs-pC-0GI">
+            <objects>
+                <viewController id="Q8B-47-a1D" customClass="LZPhotoListBrowseViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lgE-Fr-Rdg"/>
+                        <viewControllerLayoutGuide type="bottom" id="XbH-NZ-dub"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="49z-i8-AsR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmg-Ey-w7b" customClass="LZPhotoListBrowseView">
+                                <rect key="frame" x="0.0" y="348" width="414" height="200"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="PSf-rW-Scp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lmg-Ey-w7b" secondAttribute="trailing" id="F7V-b0-dFy"/>
+                            <constraint firstItem="lmg-Ey-w7b" firstAttribute="centerY" secondItem="49z-i8-AsR" secondAttribute="centerY" id="ZZ0-hR-7Qx"/>
+                            <constraint firstItem="lmg-Ey-w7b" firstAttribute="leading" secondItem="49z-i8-AsR" secondAttribute="leading" id="hqx-YS-mgY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dst-VQ-jcN"/>
+                    <connections>
+                        <outlet property="browseView" destination="lmg-Ey-w7b" id="l8r-0I-EIx"/>
+                        <outlet property="browseViewHeight" destination="PSf-rW-Scp" id="Ev2-Ig-gBH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hH8-Gf-FAp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2960.8000000000002" y="431.33433283358323"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="P8c-KQ-OtN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hxy-lt-0fK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mcY-Gw-9hF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Sb-lv-ePL" kind="relationship" relationship="rootViewController" id="ebi-Vr-jyJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n5W-iY-OsQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1244" y="432.23388305847078"/>
+        </scene>
+    </scenes>
+</document>

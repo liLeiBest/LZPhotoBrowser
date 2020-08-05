@@ -1,1 +1,1 @@
-# LZPhotoBrower
+# LZPhotoBrowser
