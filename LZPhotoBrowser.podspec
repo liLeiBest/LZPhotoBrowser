@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
     s.public_header_files     = 'LZPhotoBrowser/Classes/**/*.h'
     s.source_files            =
     'LZPhotoBrowser/Classes/**/*.{h,m}',
-    'LZPhotoBrowser/Classes/PhotoListPickerView/**/*.storyboard',
+    #'LZPhotoBrowser/Classes/PhotoListPickerView/**/*.storyboard',
     ''
 
     # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

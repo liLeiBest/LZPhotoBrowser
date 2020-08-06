@@ -25,7 +25,6 @@
   "public_header_files": "LZPhotoBrowser/Classes/**/*.h",
   "source_files": [
     "LZPhotoBrowser/Classes/**/*.{h,m}",
-    "LZPhotoBrowser/Classes/PhotoListPickerView/**/*.storyboard",
     ""
   ],
   "resource_bundles": {
