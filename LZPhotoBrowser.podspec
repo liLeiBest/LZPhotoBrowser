@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.license       = 'MIT'
     s.author        = { 'lilei' => 'lilei0502@139.com' }
     s.social_media_url = 'https://github.com/liLeiBest'
-    s.source        = { :git => 'https://github.com/liLeiBest/LZPhotoBrowser.git', :tag => '#{s.version}' }
+    s.source        = { :git => 'https://github.com/liLeiBest/LZPhotoBrowser.git', :tag => s.version.to_s }
     s.requires_arc  = true
     s.platform      = :ios, '9.0'
     s.frameworks    = 'Foundation', 'UIKit', 'Photos'

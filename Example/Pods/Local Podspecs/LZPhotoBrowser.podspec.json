@@ -11,7 +11,7 @@
   "social_media_url": "https://github.com/liLeiBest",
   "source": {
     "git": "https://github.com/liLeiBest/LZPhotoBrowser.git",
-    "tag": "#{s.version}"
+    "tag": "0.1.0"
   },
   "requires_arc": true,
   "platforms": {
