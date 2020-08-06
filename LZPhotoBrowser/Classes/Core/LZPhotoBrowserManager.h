@@ -15,10 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 显示相册
 /// @param sender  UIViewController
 /// @param maxSelectCount 最大照片选择数
-/// @param completionHandler  选择完成回调
+/// @param selectedAsset 已经选中的图片
+/// @param handler  选择完成回调
 + (void)showPhotoLibraryWithSender:(UIViewController *)sender
                     maxSelectCount:(NSUInteger)maxSelectCount
-           selectCompletionHandler:(void (^)(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets))completionHandler;
+                     selectedAsset:(NSMutableArray<PHAsset *> * _Nullable)selectedAsset
+                completionCallback:(void (^)(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets))handler;
 
 /// 预览用户已选择的照片，并可以取消已选择的照片
 /// @param sender  UIViewController

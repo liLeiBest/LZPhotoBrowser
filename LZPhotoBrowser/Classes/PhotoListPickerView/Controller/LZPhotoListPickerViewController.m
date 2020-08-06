@@ -137,6 +137,7 @@
         self.selectPhotoListDidChangeCallback([self fetchAllSelectedImages], [self fetchAllSelectedAssets], [self caculTotolHeight]);
     }
 }
+
 - (void)updateDataSourceWithImages:(NSArray *)images
                             assets:(NSArray *)assets {
     if (nil == images || nil == assets) {
@@ -267,7 +268,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self allowAddPhoto] && 0 == indexPath.row) {
         LZLog(@"添加图片");
         @lzweakify(self);
-        [LZPhotoBrowserManager showPhotoLibraryWithSender:self maxSelectCount:self.maxCount selectCompletionHandler:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
+        [LZPhotoBrowserManager showPhotoLibraryWithSender:self maxSelectCount:self.maxCount selectedAsset:[self fetchAllSelectedAssets] completionCallback:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
             @lzstrongify(self);
             [self updateDataSourceWithImages:images assets:assets];
         }];

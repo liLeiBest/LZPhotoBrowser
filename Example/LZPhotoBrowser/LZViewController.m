@@ -30,7 +30,7 @@
 
 - (IBAction)singlePhotoSelectDidTouch:(id)sender {
     
-    [LZPhotoBrowserManager showPhotoLibraryWithSender:self maxSelectCount:1 selectCompletionHandler:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
+    [LZPhotoBrowserManager showPhotoLibraryWithSender:self maxSelectCount:1 selectedAsset:nil completionCallback:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
         NSLog(@"选择的图片：%@", images);
     }];
 }

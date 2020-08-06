@@ -27,13 +27,14 @@ UIColor *configThemeColor(UIColor *color) {
 // MARK: - Public
 + (void)showPhotoLibraryWithSender:(UIViewController *)sender
                     maxSelectCount:(NSUInteger)maxSelectCount
-           selectCompletionHandler:(nonnull void (^)(NSArray<UIImage *> * _Nullable, NSArray<PHAsset *> * _Nonnull))completionHandler {
+                     selectedAsset:(NSMutableArray<PHAsset *> * _Nullable)selectedAsset completionCallback:(nonnull void (^)(NSArray<UIImage *> * _Nullable, NSArray<PHAsset *> * _Nonnull))handler {
     
     ZLPhotoActionSheet *actionSheet = self.photoActionSheet;
     actionSheet.configuration.maxSelectCount = maxSelectCount;
+    actionSheet.arrSelectedAssets = selectedAsset;
     [actionSheet setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
-        if (completionHandler) {
-            completionHandler(images, assets);
+        if (handler) {
+            handler(images, assets);
         }
     }];
     [actionSheet showPhotoLibraryWithSender:sender];
@@ -44,11 +45,12 @@ UIColor *configThemeColor(UIColor *color) {
                    assets:(NSArray<PHAsset *> *)assets
                     index:(NSInteger)index {
     
-    self.photoActionSheet.sender = sender;
-    [self.photoActionSheet previewSelectedPhotos:photos
-                                          assets:assets
-                                           index:index
-                                      isOriginal:YES];
+    ZLPhotoActionSheet *actionSheet = self.photoActionSheet;
+    actionSheet.sender = sender;
+    [actionSheet previewSelectedPhotos:photos
+                                assets:assets
+                                 index:index
+                            isOriginal:YES];
 }
 
 + (void)previewWithSender:(UIViewController *)sender
