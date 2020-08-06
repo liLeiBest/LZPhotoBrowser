@@ -28,8 +28,8 @@ Pod::Spec.new do |s|
     s.resource_bundles        = {
             'LZPhotoBrowserResourceBundle' => ['LZPhotoBrowser/Classes/Resources/*']
         }
-#    s.resource                =
-#    'LZPhotoBrowser/Classes/Resources/LZPhotoListPickerViewController.storyboardc'
+    s.resource                =
+    'LZPhotoBrowser/Classes/Resources/LZPhotoListPickerViewController.storyboardc'
 
     # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.dependency 'LZDependencyToolkit'

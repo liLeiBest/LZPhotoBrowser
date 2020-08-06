@@ -33,6 +33,7 @@
       "LZPhotoBrowser/Classes/Resources/*"
     ]
   },
+  "resources": "LZPhotoBrowser/Classes/Resources/LZPhotoListPickerViewController.storyboardc",
   "dependencies": {
     "LZDependencyToolkit": [
 
