@@ -9,14 +9,6 @@
 #import "LZPhotoBrowserManager.h"
 #import "LZPhotoListCell.h"
 
-static NSUInteger LZPhotoListMaxCount = 6;
-static NSUInteger LZPhotoListColumn = 4;
-static CGFloat LZPhotoListMarginTop = 10.0f;
-static CGFloat LZPhotoListMarginLeft = 20.0f;
-static CGFloat LZPhotoListMarginBottom = 20.0f;
-static CGFloat LZPhotoListMarginRight = 20.0f;
-static CGFloat LZPhotoListSpacing = 10.0f;
-
 @interface LZPhotoListPickerViewController ()<UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSMutableArray *imageDataSource;
@@ -44,7 +36,11 @@ static CGFloat LZPhotoListSpacing = 10.0f;
 // MARK: - Initialization
 - (instancetype)initWithCoder:(NSCoder *)coder {
     if (self = [super initWithCoder:coder]) {
-        self.maxCount = LZPhotoListMaxCount;
+        
+        self.maxCount = 6;
+        self.columns = 4;
+        self.spacing = 10;
+        self.insets = UIEdgeInsetsZero;
     }
     return self;
 }
@@ -135,8 +131,10 @@ static CGFloat LZPhotoListSpacing = 10.0f;
 }
 
 - (void)photoListDidChange {
+    
+    [self.collectionView reloadData];
     if (self.selectPhotoListDidChangeCallback) {
-        self.selectPhotoListDidChangeCallback([self fetchAllSelectedImages], [self fetchAllSelectedAssets]);
+        self.selectPhotoListDidChangeCallback([self fetchAllSelectedImages], [self fetchAllSelectedAssets], [self caculTotolHeight]);
     }
 }
 - (void)updateDataSourceWithImages:(NSArray *)images
@@ -153,7 +151,6 @@ static CGFloat LZPhotoListSpacing = 10.0f;
     [self.imageDataSource addObjectsFromArray:images];
     [self.assetDataSource addObjectsFromArray:assets];
     [self allowAddPhoto];
-    [self.collectionView reloadData];
     [self photoListDidChange];
 }
 
@@ -165,7 +162,6 @@ static CGFloat LZPhotoListSpacing = 10.0f;
     [self.imageDataSource removeObjectAtIndex:indexPath.row];
     [self.assetDataSource removeObjectAtIndex:indexPath.row];
     [self allowAddPhoto];
-    [self.collectionView reloadData];
     [self photoListDidChange];
 }
 
@@ -185,6 +181,31 @@ static CGFloat LZPhotoListSpacing = 10.0f;
         [selectedAssets removeObjectAtIndex:0];
     }
     return selectedAssets;
+}
+
+- (CGFloat)caculTotolHeight {
+    // 计算 item 尺寸
+    CGFloat maxWidth = self.collectionView.frame.size.width;
+    CGFloat totalSpacing = (self.columns - 1) * self.spacing;
+    CGFloat totalMargin = self.insets.left + self.insets.right;
+    CGFloat itemSize = floorf((maxWidth - totalSpacing -totalMargin) / self.columns);
+    // 计算行数
+    CGFloat row = 1;
+    if (self.imageDataSource.count > self.columns) {
+        
+        row = self.imageDataSource.count / self.columns;
+        if (0 != self.imageDataSource.count % self.columns) {
+            row += 1;
+        }
+    }
+    // 计算总高度
+    CGFloat height =
+    self.insets.top // 上边距
+    + self.insets.bottom // 下边距
+    + row * itemSize // item 总高度
+    + (row - 1) * self.spacing // item 间距
+    + 0;
+    return height;
 }
 
 // MARK: - UICollectionView
@@ -227,7 +248,6 @@ canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
                               withObjectAtIndex:destinationIndexPath.row];
     [self.assetDataSource exchangeObjectAtIndex:sourceIndexPath.row
                               withObjectAtIndex:destinationIndexPath.row];
-    [self.collectionView reloadData];
     [self photoListDidChange];
 }
 
@@ -268,16 +288,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     CGFloat maxWidth = self.collectionView.frame.size.width;
-    CGFloat totalSpacing = (LZPhotoListColumn - 1) * LZPhotoListSpacing;
-    CGFloat totalMargin = LZPhotoListMarginLeft + LZPhotoListMarginRight;
-    CGFloat size = floorf((maxWidth - totalSpacing -totalMargin) / LZPhotoListColumn);
+    CGFloat totalSpacing = (self.columns - 1) * self.spacing;
+    CGFloat totalMargin = self.insets.left + self.insets.right;
+    CGFloat size = floorf((maxWidth - totalSpacing -totalMargin) / self.columns);
     return CGSizeMake(size, size);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(LZPhotoListMarginTop, LZPhotoListMarginLeft, LZPhotoListMarginBottom, LZPhotoListMarginRight);
+    return self.insets;
 }
 
 @end
