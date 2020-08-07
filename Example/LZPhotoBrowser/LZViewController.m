@@ -24,7 +24,7 @@
 - (IBAction)mutiPhotoesSelectDidTouch:(id)sender {
     
     LZPhotoListPickerViewController *ctr = [LZPhotoListPickerViewController instance];
-    ctr.maxCount = 3;
+    ctr.insets = UIEdgeInsetsMake(0, 20, 0, 20);
     [self.navigationController pushViewController:ctr animated:YES];
 }
 

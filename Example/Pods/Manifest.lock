@@ -1,22 +1,22 @@
 PODS:
-  - LZDependencyToolkit (1.8.5):
-    - LZDependencyToolkit/Category (= 1.8.5)
-    - LZDependencyToolkit/Define (= 1.8.5)
-    - LZDependencyToolkit/Object (= 1.8.5)
-    - LZDependencyToolkit/Struct (= 1.8.5)
-  - LZDependencyToolkit/Category (1.8.5):
+  - LZDependencyToolkit (1.8.6):
+    - LZDependencyToolkit/Category (= 1.8.6)
+    - LZDependencyToolkit/Define (= 1.8.6)
+    - LZDependencyToolkit/Object (= 1.8.6)
+    - LZDependencyToolkit/Struct (= 1.8.6)
+  - LZDependencyToolkit/Category (1.8.6):
     - MJRefresh
-  - LZDependencyToolkit/Define (1.8.5)
-  - LZDependencyToolkit/Object (1.8.5)
-  - LZDependencyToolkit/Struct (1.8.5):
-    - LZDependencyToolkit/Struct/AppUnit (= 1.8.5)
-    - LZDependencyToolkit/Struct/CryptoUnit (= 1.8.5)
-    - LZDependencyToolkit/Struct/DeviceUnit (= 1.8.5)
-    - LZDependencyToolkit/Struct/QuickUnit (= 1.8.5)
-  - LZDependencyToolkit/Struct/AppUnit (1.8.5)
-  - LZDependencyToolkit/Struct/CryptoUnit (1.8.5)
-  - LZDependencyToolkit/Struct/DeviceUnit (1.8.5)
-  - LZDependencyToolkit/Struct/QuickUnit (1.8.5)
+  - LZDependencyToolkit/Define (1.8.6)
+  - LZDependencyToolkit/Object (1.8.6)
+  - LZDependencyToolkit/Struct (1.8.6):
+    - LZDependencyToolkit/Struct/AppUnit (= 1.8.6)
+    - LZDependencyToolkit/Struct/CryptoUnit (= 1.8.6)
+    - LZDependencyToolkit/Struct/DeviceUnit (= 1.8.6)
+    - LZDependencyToolkit/Struct/QuickUnit (= 1.8.6)
+  - LZDependencyToolkit/Struct/AppUnit (1.8.6)
+  - LZDependencyToolkit/Struct/CryptoUnit (1.8.6)
+  - LZDependencyToolkit/Struct/DeviceUnit (1.8.6)
+  - LZDependencyToolkit/Struct/QuickUnit (1.8.6)
   - LZPhotoBrowser (0.1.2):
     - LZDependencyToolkit
     - SDWebImage
@@ -43,7 +43,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LZDependencyToolkit: 17fab4c9494e7e1a77f08adfcba5672f4885a068
+  LZDependencyToolkit: 0c7f1c7191caa27694a640153f4cc70ef5455d1d
   LZPhotoBrowser: 106deda3654542e64faf0a56fa5873f68bf5db69
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9

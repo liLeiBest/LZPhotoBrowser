@@ -274,12 +274,17 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         }];
     } else {
         LZLog(@"浏览图片")
+        @lzweakify(self);
         NSUInteger index = indexPath.row;
         if ([self allowAddPhoto]) --index;
         [LZPhotoBrowserManager previewWithSender:self
-                                   photos:[self fetchAllSelectedImages]
-                                   assets:[self fetchAllSelectedAssets]
-                                    index:index];
+                                          photos:[self fetchAllSelectedImages]
+                                          assets:[self fetchAllSelectedAssets]
+                                           index:index
+                                completionCallback:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
+            @lzstrongify(self);
+            [self updateDataSourceWithImages:images assets:assets];
+        }];
     }
 }
 

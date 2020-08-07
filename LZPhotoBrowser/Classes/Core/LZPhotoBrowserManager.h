@@ -27,10 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param photos 已选择的 UIImage 照片数组
 /// @param assets 已选择的 PHAsset 照片数组
 /// @param index 点击的照片索引
+/// @param handler  选择完成回调
 + (void)previewWithSender:(UIViewController *)sender
                    photos:(NSArray<UIImage *> *)photos
                    assets:(NSArray<PHAsset *> *)assets
-                    index:(NSInteger)index;
+                    index:(NSInteger)index
+       completionCallback:(void (^)(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets))handler;
 
 /// 浏览图片
 /// @param sender  UIViewController

@@ -43,10 +43,16 @@ UIColor *configThemeColor(UIColor *color) {
 + (void)previewWithSender:(UIViewController *)sender
                    photos:(NSArray<UIImage *> *)photos
                    assets:(NSArray<PHAsset *> *)assets
-                    index:(NSInteger)index {
+                    index:(NSInteger)index
+       completionCallback:(nonnull void (^)(NSArray<UIImage *> * _Nullable, NSArray<PHAsset *> * _Nonnull))handler {
     
     ZLPhotoActionSheet *actionSheet = self.photoActionSheet;
     actionSheet.sender = sender;
+    [actionSheet setSelectImageBlock:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
+        if (handler) {
+            handler(images, assets);
+        }
+    }];
     [actionSheet previewSelectedPhotos:photos
                                 assets:assets
                                  index:index
