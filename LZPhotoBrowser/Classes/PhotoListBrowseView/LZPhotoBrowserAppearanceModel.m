@@ -13,6 +13,7 @@
 @property (nonatomic, assign) BOOL watermark;
 @property (nonatomic, strong) UIImage *watermarkImage;
 @property (nonatomic, copy) NSString *watermarkText;
+@property (nonatomic, strong) NSArray<UIAlertAction *> *customActions;
 
 @end
 @implementation LZPhotoBrowserAppearanceModel
@@ -50,6 +51,13 @@
 - (LZPhotoBrowserAppearanceModel * _Nonnull (^)(NSString * _Nonnull))watermarkTextSet {
     return ^id (NSString *watermarkText) {
         self.watermarkText = watermarkText;
+        return self;
+    };
+}
+
+- (LZPhotoBrowserAppearanceModel * _Nonnull (^)(NSArray<UIAlertAction *> * _Nonnull))customActionsSet {
+    return ^id (NSArray *customActions) {
+        self.customActions = customActions;
         return self;
     };
 }

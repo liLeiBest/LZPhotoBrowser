@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupUI];
 }
 
 // MARK: - UI Action
@@ -51,7 +52,23 @@
         UIImage *img = [UIImage imageWithContentsOfFile:imgPath];
         [arrM addObject:img];
     }
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *save = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"%@--%@", PhotoBrowserAppearanceConfig().previewImgIndexPath, PhotoBrowserAppearanceConfig().previewImg);
+    }];
+    UIAlertAction *share = [UIAlertAction actionWithTitle:@"分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    PhotoBrowserAppearanceConfig().placeholderImgSet([UIImage imageNamed:@"placehoder"]).watermarkSet(YES).watermarkTextSet(@"娃哈哈").customActionsSet(@[cancel, save, share]);
     [LZPhotoBrowserManager previewWithSender:self photos:arrM index:0];
+}
+
+// MARK: - Private
+- (void)setupUI {
+    
+    
 }
 
 @end

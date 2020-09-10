@@ -1,30 +1,30 @@
 PODS:
-  - LZDependencyToolkit (1.8.6):
-    - LZDependencyToolkit/Category (= 1.8.6)
-    - LZDependencyToolkit/Define (= 1.8.6)
-    - LZDependencyToolkit/Object (= 1.8.6)
-    - LZDependencyToolkit/Struct (= 1.8.6)
-  - LZDependencyToolkit/Category (1.8.6):
+  - LZDependencyToolkit (1.9.3):
+    - LZDependencyToolkit/Category (= 1.9.3)
+    - LZDependencyToolkit/Define (= 1.9.3)
+    - LZDependencyToolkit/Object (= 1.9.3)
+    - LZDependencyToolkit/Struct (= 1.9.3)
+  - LZDependencyToolkit/Category (1.9.3):
     - MJRefresh
-  - LZDependencyToolkit/Define (1.8.6)
-  - LZDependencyToolkit/Object (1.8.6)
-  - LZDependencyToolkit/Struct (1.8.6):
-    - LZDependencyToolkit/Struct/AppUnit (= 1.8.6)
-    - LZDependencyToolkit/Struct/CryptoUnit (= 1.8.6)
-    - LZDependencyToolkit/Struct/DeviceUnit (= 1.8.6)
-    - LZDependencyToolkit/Struct/QuickUnit (= 1.8.6)
-  - LZDependencyToolkit/Struct/AppUnit (1.8.6)
-  - LZDependencyToolkit/Struct/CryptoUnit (1.8.6)
-  - LZDependencyToolkit/Struct/DeviceUnit (1.8.6)
-  - LZDependencyToolkit/Struct/QuickUnit (1.8.6)
+  - LZDependencyToolkit/Define (1.9.3)
+  - LZDependencyToolkit/Object (1.9.3)
+  - LZDependencyToolkit/Struct (1.9.3):
+    - LZDependencyToolkit/Struct/AppUnit (= 1.9.3)
+    - LZDependencyToolkit/Struct/CryptoUnit (= 1.9.3)
+    - LZDependencyToolkit/Struct/DeviceUnit (= 1.9.3)
+    - LZDependencyToolkit/Struct/QuickUnit (= 1.9.3)
+  - LZDependencyToolkit/Struct/AppUnit (1.9.3)
+  - LZDependencyToolkit/Struct/CryptoUnit (1.9.3)
+  - LZDependencyToolkit/Struct/DeviceUnit (1.9.3)
+  - LZDependencyToolkit/Struct/QuickUnit (1.9.3)
   - LZPhotoBrowser (0.1.3):
     - LZDependencyToolkit
     - SDWebImage
     - ZLPhotoBrowser
-  - MJRefresh (3.4.3)
-  - SDWebImage (5.8.4):
-    - SDWebImage/Core (= 5.8.4)
-  - SDWebImage/Core (5.8.4)
+  - MJRefresh (3.5.0)
+  - SDWebImage (5.9.0):
+    - SDWebImage/Core (= 5.9.0)
+  - SDWebImage/Core (5.9.0)
   - ZLPhotoBrowser (3.2.0):
     - SDWebImage
 
@@ -43,10 +43,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LZDependencyToolkit: 0c7f1c7191caa27694a640153f4cc70ef5455d1d
+  LZDependencyToolkit: 932b67228a3cba6995cb8a93541df2d79648041f
   LZPhotoBrowser: 0db95503fe0c443f4c1dc9285d9a058b15d05465
-  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
-  SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
   ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
 
 PODFILE CHECKSUM: ac0c8366cc464398e9cfefb3ab7ef0011e053cfd

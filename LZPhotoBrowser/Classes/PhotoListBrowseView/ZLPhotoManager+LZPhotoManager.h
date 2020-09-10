@@ -5,7 +5,7 @@
 //  Created by Dear.Q on 2020/8/5.
 //
 
-#import <ZLPhotoBrowser/ZLPhotoBrowser.h>
+#import <ZLPhotoBrowser/ZLPhotoManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

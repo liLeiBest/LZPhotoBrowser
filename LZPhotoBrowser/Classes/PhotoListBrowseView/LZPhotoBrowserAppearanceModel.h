@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) UIImage *watermarkImage;
 /// 水印文本
 @property (nonatomic, copy, readonly) NSString *watermarkText;
+/// 大图
+@property (nonatomic, strong) UIImage *previewImg;
+/// 大图索引
+@property (nonatomic, strong) NSIndexPath *previewImgIndexPath;
+/// 大图长按事件列表
+@property (nonatomic, strong, readonly) NSArray<UIAlertAction *> *customActions;
 /// 设置占位图
 - (LZPhotoBrowserAppearanceModel * (^)(UIImage *))placeholderImgSet;
 /// 设置保存图片是否添加水印，默认 NO
@@ -27,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (LZPhotoBrowserAppearanceModel * (^)(UIImage *))watermarkImageSet;
 /// 设置水印文本，默认 nil
 - (LZPhotoBrowserAppearanceModel * (^)(NSString *))watermarkTextSet;
+/// 设置大图长按事件，默认 nil
+- (LZPhotoBrowserAppearanceModel * (^)(NSArray<UIAlertAction *> *))customActionsSet;
 
 @end
 

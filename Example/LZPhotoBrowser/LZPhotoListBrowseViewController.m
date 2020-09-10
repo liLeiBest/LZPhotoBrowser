@@ -53,8 +53,17 @@
         [arrM addObject:model];
     }
     CGFloat width = LZDeviceInfo.screen_width();
-    LZPhotoBrowserAppearanceModel *appearanceConfig = PhotoBrowserAppearanceConfig().placeholderImgSet([UIImage imageNamed:@"placehoder"]).watermarkSet(YES).watermarkTextSet(@"娃哈哈");
-    LZPhotoListBrowseViewConfigModel *config = defaultConfig().maxShowCountSet(4).maxCountSet(photos.count).maxWidthSet(width).calcu().appearanceConfigSet(appearanceConfig);
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *save = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    PhotoBrowserAppearanceConfig().placeholderImgSet([UIImage imageNamed:@"placehoder"]).watermarkSet(YES).watermarkTextSet(@"娃哈哈").customActionsSet(@[cancel, save, delete]);
+    LZPhotoListBrowseViewConfigModel *config = defaultConfig().maxShowCountSet(4).maxCountSet(photos.count).maxWidthSet(width).calcu().appearanceConfigSet(PhotoBrowserAppearanceConfig());
     self.browseView.config = config;
     self.browseViewHeight.constant = config.height;
     [self.browseView updatePhotoDataSource:arrM frameDataSource:config.frameDataSource];

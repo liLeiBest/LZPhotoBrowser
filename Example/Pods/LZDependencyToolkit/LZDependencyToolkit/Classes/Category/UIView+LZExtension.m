@@ -8,6 +8,7 @@
 
 #import "UIView+LZExtension.h"
 #import "NSBundle+LZExtension.h"
+#import "NSObject+LZRuntime.h"
 
 @implementation UIView (LZFrame)
 
@@ -192,23 +193,110 @@
 
 @end
 
+static char const * const kBorderLayer = "zl_borderLayer";
+@interface LZWeakLayerObjectContainer : NSObject
+
+@property (nonatomic, readonly, strong) id weakObject;
+
+/** 构造方法 */
+- (instancetype)initWithWeakObject:(id)object;
+
+@end
+
+@implementation LZWeakLayerObjectContainer
+
+- (instancetype)initWithWeakObject:(id)object {
+    
+    if (self = [super init]) {
+        _weakObject = object;
+    }
+    return self;
+}
+
+@end
+
 @implementation UIView (LZRoundCorner)
 
 - (void)roundingCorners:(UIRectCorner)corners
 				 radius:(CGFloat)radius {
-	[self roundedRect:self.bounds roundingCorners:corners radius:radius];
+	[self roundedRect:self.bounds
+      roundingCorners:corners
+               radius:radius];
+}
+
+- (void)roundingCorners:(UIRectCorner)corners
+                 radius:(CGFloat)radius
+            borderColor:(UIColor *)borderColor
+            borderWidth:(CGFloat)borderWidth {
+    [self roundedRect:self.bounds
+    roundingCorners:corners
+             radius:radius
+        borderColor:borderColor
+        borderWidth:borderWidth];
 }
 
 - (void)roundedRect:(CGRect)rect
 	roundingCorners:(UIRectCorner)corners
 			 radius:(CGFloat)radius {
-	
-	UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect
-											   byRoundingCorners:corners
-													 cornerRadii:CGSizeMake(radius, radius)];
-	CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-	shapeLayer.path = path.CGPath;
-	self.layer.mask = shapeLayer;
+    [self roundedRect:rect
+      roundingCorners:corners
+               radius:radius
+               border:NO
+          borderColor:nil
+          borderWidth:0];
+}
+
+- (void)roundedRect:(CGRect)rect
+    roundingCorners:(UIRectCorner)corners
+             radius:(CGFloat)radius
+        borderColor:(UIColor *)borderColor
+        borderWidth:(CGFloat)borderWidth {
+    [self roundedRect:rect
+      roundingCorners:corners
+               radius:radius
+               border:YES
+          borderColor:borderColor
+          borderWidth:borderWidth];
+}
+
+// MARK: - Private
+- (CAShapeLayer *)borderLayer {
+    
+    LZWeakLayerObjectContainer *container = LZ_getAssociatedObject(self, kBorderLayer);
+    return container.weakObject;
+}
+
+- (void)setBorderLayer:(CAShapeLayer *)emptyDataSetImage {
+    LZ_setAssociatedObject(self, kBorderLayer, [[LZWeakLayerObjectContainer alloc] initWithWeakObject:emptyDataSetImage]);
+}
+
+- (void)roundedRect:(CGRect)rect
+    roundingCorners:(UIRectCorner)corners
+             radius:(CGFloat)radius
+             border:(BOOL)border
+        borderColor:(UIColor * __nullable)borderColor
+        borderWidth:(CGFloat)borderWidth {
+    // 圆角
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect
+                                               byRoundingCorners:corners
+                                                     cornerRadii:CGSizeMake(radius, radius)];
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = path.CGPath;
+    self.layer.mask = shapeLayer;
+    // 边框
+    if (YES == border) {
+        if (nil == self.borderLayer) {
+            
+            self.borderLayer = [CAShapeLayer layer];
+            [self.layer addSublayer:self.borderLayer];
+        }
+        CAShapeLayer *borderLayer = self.borderLayer;
+        borderLayer.path = path.CGPath;
+        borderLayer.fillColor = [UIColor clearColor].CGColor;
+        borderLayer.strokeColor = borderColor.CGColor;
+        borderLayer.lineWidth = borderWidth;
+        borderLayer.frame = rect;
+    }
 }
 
 @end
@@ -217,6 +305,12 @@
 
 - (void)configLimitLength:(NSUInteger)limitLength
               textContent:(NSString *)textContent {
+    [self configLimitLength:limitLength textContent:textContent changeHandler:nil];
+}
+
+- (void)configLimitLength:(NSUInteger)limitLength
+              textContent:(NSString *)textContent
+            changeHandler:(nullable void (^)(BOOL))handler {
     
     Protocol *protocol = @protocol(UITextInput);
     NSAssert([self conformsToProtocol:protocol], @"不是可输入视图");
@@ -235,10 +329,19 @@
         position = [inputView positionFromPosition:selectedRange.start offset:0];
         if (!position) { // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
             count = limitLength - textContent.length;
+            if (handler) {
+                handler(NO);
+            }
         } else { // 有高亮选择的字符串，则暂不对文字进行统计和限制
+            if (handler) {
+                handler(YES);
+            }
         }
     } else { // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
         count = limitLength - [inputView countWord:textContent];
+        if (handler) {
+            handler(NO);
+        }
     }
     
     if (count <= 0 && nil == position) {
@@ -247,10 +350,12 @@
         if ([self respondsToSelector:selector]) {
             
             NSString *content = [textContent substringToIndex:limitLength];
-            [inputView performSelector:selector
-                              onThread:[NSThread mainThread]
-                            withObject:content
-                         waitUntilDone:NO];
+            IMP imp = [inputView methodForSelector:selector];
+            void (*func)(id, SEL, NSString *) = (void *)imp;
+            func(inputView, selector, content);
+        }
+        if (handler) {
+            handler(NO);
         }
     }
 }

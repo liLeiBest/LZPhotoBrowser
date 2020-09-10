@@ -17,6 +17,7 @@
 #import "LZPhotoListBrowseView.h"
 #import "LZPhotoListBrowseViewConfigModel.h"
 #import "ZLPhotoManager+LZPhotoManager.h"
+#import "ZLShowBigImgViewController+LZAlertController.h"
 #import "LZPhotoListFlowLayout.h"
 #import "LZPhotoListPickerViewController.h"
 #import "LZPhotoListCell.h"
