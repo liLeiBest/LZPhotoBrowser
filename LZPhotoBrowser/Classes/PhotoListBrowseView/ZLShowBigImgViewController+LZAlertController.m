@@ -41,7 +41,12 @@
                 }
             }
         }
-        LZQuickUnit.sheet(self, nil, nil, PhotoBrowserAppearanceConfig().customActions);
+        NSArray *actions = PhotoBrowserAppearanceConfig().customActions;
+        NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:actions.count];
+        for (UIAlertAction *action in PhotoBrowserAppearanceConfig().customActions) {
+            [arrM addObject:[action copy]];
+        }
+        LZQuickUnit.sheet(self, nil, nil, [arrM copy]);
     } else {
         [self lz_showActionAlert];
     }
