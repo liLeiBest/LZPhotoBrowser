@@ -17,7 +17,7 @@ PODS:
   - LZDependencyToolkit/Struct/CryptoUnit (1.9.4)
   - LZDependencyToolkit/Struct/DeviceUnit (1.9.4)
   - LZDependencyToolkit/Struct/QuickUnit (1.9.4)
-  - LZPhotoBrowser (0.1.4):
+  - LZPhotoBrowser (0.1.5):
     - LZDependencyToolkit
     - SDWebImage
     - ZLPhotoBrowser
@@ -44,7 +44,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   LZDependencyToolkit: 5088a2f139ee8cbf18aa722713a7128654b29f44
-  LZPhotoBrowser: f085408c7fcaca170231b593adf35ed052d52a09
+  LZPhotoBrowser: 11eaa51bac67e2b3bf86cf4ac1f776da9a17ef70
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
   ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
