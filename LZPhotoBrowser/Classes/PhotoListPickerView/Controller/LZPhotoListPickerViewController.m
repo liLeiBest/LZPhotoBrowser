@@ -74,6 +74,7 @@
         [self.selectedImgArray removeAllObjects];
     }
     [self.selectedImgArray addObjectsFromArray:selectedList];
+    [self updateDataSourceWithImages:@[] assets:@[]];
 }
 
 // MARK: - Public
