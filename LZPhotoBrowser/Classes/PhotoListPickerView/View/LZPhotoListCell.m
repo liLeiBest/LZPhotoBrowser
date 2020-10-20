@@ -6,6 +6,7 @@
 //
 
 #import "LZPhotoListCell.h"
+#import <SDWebImage/SDWebImage.h>
 
 @interface LZPhotoListCell ()
 
@@ -31,9 +32,19 @@
         self.deleteBtn.hidden = YES;
         self.imgView.image = [self image:@"photo_add_icon" inBundle:LZPhotoBrowserBundle];
     } else {
-        
-        self.deleteBtn.hidden = NO;
-        self.imgView.image = (UIImage *)photoImg;
+        if ([photoImg isKindOfClass:[NSString class]]) {
+            
+            self.deleteBtn.hidden = NO;
+            [self.imgView sd_setImageWithURL:[NSURL URLWithString:(NSString *)photoImg] placeholderImage:nil];
+        } else if ([photoImg isKindOfClass:[NSURL class]]) {
+            
+            self.deleteBtn.hidden = NO;
+            [self.imgView sd_setImageWithURL:(NSURL *)photoImg placeholderImage:nil];
+        } else if ([photoImg isKindOfClass:[UIImage class]]) {
+            
+            self.deleteBtn.hidden = NO;
+            self.imgView.image = (UIImage *)photoImg;
+        }
     }
 }
 

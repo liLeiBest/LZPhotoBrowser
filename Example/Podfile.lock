@@ -1,30 +1,30 @@
 PODS:
-  - LZDependencyToolkit (1.9.4):
-    - LZDependencyToolkit/Category (= 1.9.4)
-    - LZDependencyToolkit/Define (= 1.9.4)
-    - LZDependencyToolkit/Object (= 1.9.4)
-    - LZDependencyToolkit/Struct (= 1.9.4)
-  - LZDependencyToolkit/Category (1.9.4):
+  - LZDependencyToolkit (1.9.6):
+    - LZDependencyToolkit/Category (= 1.9.6)
+    - LZDependencyToolkit/Define (= 1.9.6)
+    - LZDependencyToolkit/Object (= 1.9.6)
+    - LZDependencyToolkit/Struct (= 1.9.6)
+  - LZDependencyToolkit/Category (1.9.6):
     - MJRefresh
-  - LZDependencyToolkit/Define (1.9.4)
-  - LZDependencyToolkit/Object (1.9.4)
-  - LZDependencyToolkit/Struct (1.9.4):
-    - LZDependencyToolkit/Struct/AppUnit (= 1.9.4)
-    - LZDependencyToolkit/Struct/CryptoUnit (= 1.9.4)
-    - LZDependencyToolkit/Struct/DeviceUnit (= 1.9.4)
-    - LZDependencyToolkit/Struct/QuickUnit (= 1.9.4)
-  - LZDependencyToolkit/Struct/AppUnit (1.9.4)
-  - LZDependencyToolkit/Struct/CryptoUnit (1.9.4)
-  - LZDependencyToolkit/Struct/DeviceUnit (1.9.4)
-  - LZDependencyToolkit/Struct/QuickUnit (1.9.4)
+  - LZDependencyToolkit/Define (1.9.6)
+  - LZDependencyToolkit/Object (1.9.6)
+  - LZDependencyToolkit/Struct (1.9.6):
+    - LZDependencyToolkit/Struct/AppUnit (= 1.9.6)
+    - LZDependencyToolkit/Struct/CryptoUnit (= 1.9.6)
+    - LZDependencyToolkit/Struct/DeviceUnit (= 1.9.6)
+    - LZDependencyToolkit/Struct/QuickUnit (= 1.9.6)
+  - LZDependencyToolkit/Struct/AppUnit (1.9.6)
+  - LZDependencyToolkit/Struct/CryptoUnit (1.9.6)
+  - LZDependencyToolkit/Struct/DeviceUnit (1.9.6)
+  - LZDependencyToolkit/Struct/QuickUnit (1.9.6)
   - LZPhotoBrowser (0.1.5):
     - LZDependencyToolkit
     - SDWebImage
     - ZLPhotoBrowser
   - MJRefresh (3.5.0)
-  - SDWebImage (5.9.0):
-    - SDWebImage/Core (= 5.9.0)
-  - SDWebImage/Core (5.9.0)
+  - SDWebImage (5.9.3):
+    - SDWebImage/Core (= 5.9.3)
+  - SDWebImage/Core (5.9.3)
   - ZLPhotoBrowser (3.2.0):
     - SDWebImage
 
@@ -32,7 +32,7 @@ DEPENDENCIES:
   - LZPhotoBrowser (from `../`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - LZDependencyToolkit
     - MJRefresh
     - SDWebImage
@@ -43,12 +43,12 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LZDependencyToolkit: 5088a2f139ee8cbf18aa722713a7128654b29f44
+  LZDependencyToolkit: cf31d80fe49993cf82f65a74c0d31767ecb28a6f
   LZPhotoBrowser: 11eaa51bac67e2b3bf86cf4ac1f776da9a17ef70
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
+  SDWebImage: a31ee8e90a97303529e03fb0c333eae0eacb88e9
   ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
 
-PODFILE CHECKSUM: ac0c8366cc464398e9cfefb3ab7ef0011e053cfd
+PODFILE CHECKSUM: 351b0abbde0391f1733013e746cdc086bc478a65
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

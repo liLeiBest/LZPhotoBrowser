@@ -11,6 +11,7 @@
 
 @interface LZPhotoListPickerViewController ()<UICollectionViewDelegateFlowLayout>
 
+@property (nonatomic, strong) NSMutableArray *selectedImgArray;
 @property (nonatomic, strong) NSMutableArray *imageDataSource;
 @property (nonatomic, strong) NSMutableArray *assetDataSource;
 
@@ -19,6 +20,13 @@
 @implementation LZPhotoListPickerViewController
 
 // MARK: - Lazy Loading
+- (NSMutableArray *)selectedImgArray {
+    if (nil == _selectedImgArray) {
+        _selectedImgArray = [NSMutableArray array];
+    }
+    return _selectedImgArray;
+}
+
 - (NSMutableArray *)imageDataSource {
     if (nil == _imageDataSource) {
         _imageDataSource = [NSMutableArray array];
@@ -57,6 +65,15 @@
     _themeColor = themeColor;
     
     [LZPhotoBrowserManager configThemeColor:themeColor];
+}
+
+- (void)setSelectedList:(NSArray *)selectedList {
+    _selectedList = selectedList;
+    
+    if (self.selectedImgArray.count) {
+        [self.selectedImgArray removeAllObjects];
+    }
+    [self.selectedImgArray addObjectsFromArray:selectedList];
 }
 
 // MARK: - Public
@@ -134,7 +151,12 @@
     
     [self.collectionView reloadData];
     if (self.selectPhotoListDidChangeCallback) {
-        self.selectPhotoListDidChangeCallback([self fetchAllSelectedImages], [self fetchAllSelectedAssets], [self caculTotolHeight]);
+        
+        NSMutableArray *selectedAssets = [NSMutableArray arrayWithArray:self.assetDataSource];
+        if ([self allowAddPhoto]) {
+            [selectedAssets removeObjectAtIndex:0];
+        }
+        self.selectPhotoListDidChangeCallback([self fetchAllSelectedImages], selectedAssets, [self caculTotolHeight]);
     }
 }
 
@@ -143,11 +165,19 @@
     if (nil == images || nil == assets) {
         return;
     }
-    if (self.imageDataSource.count
-        || self.assetDataSource.count) {
+    if (self.imageDataSource.count || self.assetDataSource.count) {
         
         [self.imageDataSource removeAllObjects];
         [self.assetDataSource removeAllObjects];
+    }
+    if (self.selectedImgArray && self.selectedImgArray.count) {
+        
+        [self.imageDataSource addObjectsFromArray:self.selectedImgArray];
+        for (NSUInteger i = 0; i < self.selectedImgArray.count; i++) {
+            
+            NSNull *null = [[NSNull alloc] init];
+            [self.assetDataSource addObject:null];
+        }
     }
     [self.imageDataSource addObjectsFromArray:images];
     [self.assetDataSource addObjectsFromArray:assets];
@@ -160,8 +190,16 @@
         || self.assetDataSource.count < indexPath.row) {
         return;
     }
+    id image = [self.imageDataSource objectAtIndex:indexPath.row];
+    for (id obj in self.selectedImgArray) {
+        if ([obj isEqual:image]) {
+            [self.selectedImgArray removeObject:obj];
+            break;
+        }
+    }
     [self.imageDataSource removeObjectAtIndex:indexPath.row];
     [self.assetDataSource removeObjectAtIndex:indexPath.row];
+    
     [self allowAddPhoto];
     [self photoListDidChange];
 }
@@ -178,9 +216,11 @@
 - (NSMutableArray *)fetchAllSelectedAssets {
     
     NSMutableArray *selectedAssets = [NSMutableArray arrayWithArray:self.assetDataSource];
-    if ([self allowAddPhoto]) {
-        [selectedAssets removeObjectAtIndex:0];
-    }
+    [selectedAssets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[NSNull class]]) {
+            [selectedAssets removeObject:obj];
+        }
+    }];
     return selectedAssets;
 }
 
@@ -268,23 +308,28 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self allowAddPhoto] && 0 == indexPath.row) {
         LZLog(@"添加图片");
         @lzweakify(self);
-        [LZPhotoBrowserManager showPhotoLibraryWithSender:self maxSelectCount:self.maxCount selectedAsset:[self fetchAllSelectedAssets] completionCallback:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
+        NSUInteger maxCount = self.maxCount - self.selectedImgArray.count;
+        [LZPhotoBrowserManager showPhotoLibraryWithSender:self maxSelectCount:maxCount selectedAsset:[self fetchAllSelectedAssets] completionCallback:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
             @lzstrongify(self);
             [self updateDataSourceWithImages:images assets:assets];
         }];
     } else {
         LZLog(@"浏览图片")
-        @lzweakify(self);
         NSUInteger index = indexPath.row;
         if ([self allowAddPhoto]) --index;
-        [LZPhotoBrowserManager previewWithSender:self
-                                          photos:[self fetchAllSelectedImages]
-                                          assets:[self fetchAllSelectedAssets]
-                                           index:index
-                                completionCallback:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
-            @lzstrongify(self);
-            [self updateDataSourceWithImages:images assets:assets];
-        }];
+        if (self.selectedImgArray.count) {
+            [LZPhotoBrowserManager previewWithSender:self photos:[self fetchAllSelectedImages] index:index];
+        } else {
+            @lzweakify(self);
+            [LZPhotoBrowserManager previewWithSender:self
+                                              photos:[self fetchAllSelectedImages]
+                                              assets:[self fetchAllSelectedAssets]
+                                               index:index
+                                  completionCallback:^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets) {
+                @lzstrongify(self);
+                [self updateDataSourceWithImages:images assets:assets];
+            }];
+        }
     }
 }
 
