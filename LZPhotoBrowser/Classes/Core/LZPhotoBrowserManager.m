@@ -106,7 +106,7 @@ UIColor *configThemeColor(UIColor *color) {
     actionSheet.configuration.allowEditVideo = NO;
     actionSheet.configuration.allowSlideSelect = YES;
     actionSheet.configuration.allowDragSelect = YES;
-    actionSheet.configuration.allowTakePhotoInLibrary = NO;
+    actionSheet.configuration.allowTakePhotoInLibrary = YES;
     actionSheet.configuration.showCaptureImageOnTakePhotoBtn = NO;
     actionSheet.configuration.shouldAnialysisAsset = YES;
     //颜色，状态栏样式
