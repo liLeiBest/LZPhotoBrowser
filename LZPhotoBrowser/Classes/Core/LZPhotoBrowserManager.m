@@ -96,6 +96,8 @@ UIColor *configThemeColor(UIColor *color) {
 + (ZLPhotoActionSheet *)photoActionSheet {
     
     ZLPhotoActionSheet *actionSheet = [[ZLPhotoActionSheet alloc] init];
+    actionSheet.configuration.showSelectedMask = YES;
+    actionSheet.configuration.selectedMaskColor = [UIColor colorWithWhite:0 alpha:0.6];
     actionSheet.configuration.sortAscending = NO;
     actionSheet.configuration.allowSelectImage = YES;
     actionSheet.configuration.allowSelectVideo = NO;
