@@ -24,11 +24,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// 已选中列表
 @property (nonatomic, strong) NSArray *selectedList;
 /// 图片选择列表改变回调
-@property (nonatomic, copy) void (^selectPhotoListDidChangeCallback)(NSArray * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, CGFloat totalHeight);
+@property (nonatomic, copy) void (^selectPhotoListDidChangeCallback)(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, CGFloat totalHeight);
 
 
 /// 实例
 + (instancetype)instance;
+
+/// 更新数据源
+/// @param images UIImage 列表
+/// @param assets PHAsset 列表
+- (void)updateDataSourceWithImages:(NSArray<UIImage *> * _Nullable)images
+                            assets:(NSArray<PHAsset *> * _Nullable)assets;
 
 @end
 

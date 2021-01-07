@@ -81,7 +81,31 @@
 + (instancetype)instance {
     return [self viewControllerFromstoryboard:@"LZPhotoListPickerViewController"
                                      inBundle:LZPhotoBrowserBundle];
-    
+}
+
+- (void)updateDataSourceWithImages:(NSArray *)images
+                            assets:(NSArray *)assets {
+    if (nil == images || nil == assets) {
+        return;
+    }
+    if (self.imageDataSource.count || self.assetDataSource.count) {
+        
+        [self.imageDataSource removeAllObjects];
+        [self.assetDataSource removeAllObjects];
+    }
+    if (self.selectedImgArray && self.selectedImgArray.count) {
+        
+        [self.imageDataSource addObjectsFromArray:self.selectedImgArray];
+        for (NSUInteger i = 0; i < self.selectedImgArray.count; i++) {
+            
+            NSNull *null = [[NSNull alloc] init];
+            [self.assetDataSource addObject:null];
+        }
+    }
+    [self.imageDataSource addObjectsFromArray:images];
+    [self.assetDataSource addObjectsFromArray:assets];
+    [self allowAddPhoto];
+    [self photoListDidChange];
 }
 
 // MARK: - UI Action
@@ -159,31 +183,6 @@
         }
         self.selectPhotoListDidChangeCallback([self fetchAllSelectedImages], selectedAssets, [self caculTotolHeight]);
     }
-}
-
-- (void)updateDataSourceWithImages:(NSArray *)images
-                            assets:(NSArray *)assets {
-    if (nil == images || nil == assets) {
-        return;
-    }
-    if (self.imageDataSource.count || self.assetDataSource.count) {
-        
-        [self.imageDataSource removeAllObjects];
-        [self.assetDataSource removeAllObjects];
-    }
-    if (self.selectedImgArray && self.selectedImgArray.count) {
-        
-        [self.imageDataSource addObjectsFromArray:self.selectedImgArray];
-        for (NSUInteger i = 0; i < self.selectedImgArray.count; i++) {
-            
-            NSNull *null = [[NSNull alloc] init];
-            [self.assetDataSource addObject:null];
-        }
-    }
-    [self.imageDataSource addObjectsFromArray:images];
-    [self.assetDataSource addObjectsFromArray:assets];
-    [self allowAddPhoto];
-    [self photoListDidChange];
 }
 
 - (void)deleteDataSourceWithIndexPath:(NSIndexPath *)indexPath {
