@@ -57,7 +57,6 @@
     [super viewDidLoad];
     
     [self setupUI];
-    [self updateDataSourceWithImages:@[] assets:@[]];
 }
 
 // MARK: - Setter
@@ -74,7 +73,9 @@
         [self.selectedImgArray removeAllObjects];
     }
     [self.selectedImgArray addObjectsFromArray:selectedList];
-    [self updateDataSourceWithImages:@[] assets:@[]];
+    [self updateDataSourceWithSelectedImages];
+    [self allowAddPhoto];
+    [self photoListDidChange];
 }
 
 // MARK: - Public
@@ -93,14 +94,20 @@
         [self.imageDataSource removeAllObjects];
         [self.assetDataSource removeAllObjects];
     }
-    if (self.selectedImgArray && self.selectedImgArray.count) {
-        
-        [self.imageDataSource addObjectsFromArray:self.selectedImgArray];
-        for (NSUInteger i = 0; i < self.selectedImgArray.count; i++) {
-            
-            NSNull *null = [[NSNull alloc] init];
-            [self.assetDataSource addObject:null];
+    BOOL existSelectedImgs = NO;
+    for (NSURL *imgURL in self.selectedImgArray) {
+        for (id image in images) {
+            if ([image isEqual:imgURL]) {
+                existSelectedImgs = YES;
+                break;
+            }
         }
+        if (existSelectedImgs) {
+            break;
+        }
+    }
+    if (NO == existSelectedImgs) {
+        [self updateDataSourceWithSelectedImages];
     }
     [self.imageDataSource addObjectsFromArray:images];
     [self.assetDataSource addObjectsFromArray:assets];
@@ -199,7 +206,6 @@
     }
     [self.imageDataSource removeObjectAtIndex:indexPath.row];
     [self.assetDataSource removeObjectAtIndex:indexPath.row];
-    
     [self allowAddPhoto];
     [self photoListDidChange];
 }
@@ -222,6 +228,18 @@
         }
     }];
     return selectedAssets;
+}
+
+- (void)updateDataSourceWithSelectedImages {
+    if (self.selectedImgArray && self.selectedImgArray.count) {
+        
+        [self.imageDataSource addObjectsFromArray:self.selectedImgArray];
+        for (NSUInteger i = 0; i < self.selectedImgArray.count; i++) {
+            
+            NSNull *null = [[NSNull alloc] init];
+            [self.assetDataSource addObject:null];
+        }
+    }
 }
 
 - (CGFloat)caculTotolHeight {
