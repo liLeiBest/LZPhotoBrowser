@@ -57,6 +57,8 @@
     [super viewDidLoad];
     
     [self setupUI];
+    [self allowAddPhoto];
+    [self photoListDidChange];
 }
 
 // MARK: - Setter
