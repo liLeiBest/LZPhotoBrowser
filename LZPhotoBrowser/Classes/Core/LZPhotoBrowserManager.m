@@ -104,7 +104,7 @@ UIColor *configThemeColor(UIColor *color) {
     actionSheet.configuration.allowSelectGif = NO;
     actionSheet.configuration.allowSelectLivePhoto = NO;
     actionSheet.configuration.allowForceTouch = YES;
-    actionSheet.configuration.allowEditImage = YES;
+    actionSheet.configuration.allowEditImage = NO;
     actionSheet.configuration.allowEditVideo = NO;
     actionSheet.configuration.allowSlideSelect = YES;
     actionSheet.configuration.allowDragSelect = YES;
