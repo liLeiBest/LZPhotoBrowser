@@ -99,6 +99,7 @@ UIColor *configThemeColor(UIColor *color) {
     actionSheet.configuration.showSelectedMask = YES;
     actionSheet.configuration.selectedMaskColor = [UIColor colorWithWhite:0 alpha:0.6];
     actionSheet.configuration.sortAscending = NO;
+    actionSheet.configuration.showSelectBtn = YES;
     actionSheet.configuration.allowSelectImage = YES;
     actionSheet.configuration.allowSelectVideo = NO;
     actionSheet.configuration.allowSelectGif = NO;
