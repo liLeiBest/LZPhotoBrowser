@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name          = 'LZPhotoBrowser'
-    s.version       = '0.2.4'
+    s.version       = '0.2.5'
     s.summary       = 'A short description of LZPhotoBrowser..'
     s.description      = <<-DESC
     图片浏览器：
