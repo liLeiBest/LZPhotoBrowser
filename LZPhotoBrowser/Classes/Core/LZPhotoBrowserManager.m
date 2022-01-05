@@ -6,6 +6,7 @@
 //
 
 #import "LZPhotoBrowserManager.h"
+#import <objc/objc.h>
 #import <ZLPhotoBrowser/ZLPhotoBrowser.h>
 
 UIColor *configThemeColor(UIColor *color) {
@@ -23,6 +24,16 @@ UIColor *configThemeColor(UIColor *color) {
 @interface LZPhotoBrowserManager ()
 @end
 @implementation LZPhotoBrowserManager
+
+// MARK: - Setter
++ (void)setAllowSelectVideo:(BOOL)allowSelectVideo {
+    LZ_setAssociatedObject(self, _cmd, @(allowSelectVideo));
+}
+
+// MARK: - Getter
++ (BOOL)allowSelectVideo {
+    return [LZ_getAssociatedObject(self, @selector(setAllowSelectVideo:)) boolValue];
+}
 
 // MARK: - Public
 + (void)showPhotoLibraryWithSender:(UIViewController *)sender
@@ -101,7 +112,8 @@ UIColor *configThemeColor(UIColor *color) {
     actionSheet.configuration.sortAscending = NO;
     actionSheet.configuration.showSelectBtn = YES;
     actionSheet.configuration.allowSelectImage = YES;
-    actionSheet.configuration.allowSelectVideo = NO;
+    actionSheet.configuration.allowSelectVideo = self.allowSelectVideo;
+    actionSheet.configuration.mutuallyExclusiveSelectInMix = YES;
     actionSheet.configuration.allowSelectGif = NO;
     actionSheet.configuration.allowSelectLivePhoto = NO;
     actionSheet.configuration.allowForceTouch = YES;

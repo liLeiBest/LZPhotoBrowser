@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LZPhotoBrowserManager : NSObject
 
+/// 是否允许选择视频，默认 NO
+@property (nonatomic, assign, class) BOOL allowSelectVideo;
+
+
 /// 显示相册
 /// @param sender  UIViewController
 /// @param maxSelectCount 最大照片选择数
