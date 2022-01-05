@@ -26,11 +26,21 @@ UIColor *configThemeColor(UIColor *color) {
 @implementation LZPhotoBrowserManager
 
 // MARK: - Setter
++ (void)setAllowSelectImage:(BOOL)allowSelectImage {
+    LZ_setAssociatedObject(self, _cmd, @(allowSelectImage));
+}
+
 + (void)setAllowSelectVideo:(BOOL)allowSelectVideo {
     LZ_setAssociatedObject(self, _cmd, @(allowSelectVideo));
 }
 
 // MARK: - Getter
++ (BOOL)allowSelectImage {
+    
+    NSNumber *number = LZ_getAssociatedObject(self, @selector(setAllowSelectImage:));
+    return number ? [number boolValue] : YES;
+}
+
 + (BOOL)allowSelectVideo {
     return [LZ_getAssociatedObject(self, @selector(setAllowSelectVideo:)) boolValue];
 }
@@ -111,7 +121,7 @@ UIColor *configThemeColor(UIColor *color) {
     actionSheet.configuration.selectedMaskColor = [UIColor colorWithWhite:0 alpha:0.6];
     actionSheet.configuration.sortAscending = NO;
     actionSheet.configuration.showSelectBtn = YES;
-    actionSheet.configuration.allowSelectImage = YES;
+    actionSheet.configuration.allowSelectImage = self.allowSelectImage;
     actionSheet.configuration.allowSelectVideo = self.allowSelectVideo;
     actionSheet.configuration.mutuallyExclusiveSelectInMix = YES;
     actionSheet.configuration.allowSelectGif = NO;

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LZPhotoBrowserManager : NSObject
 
+/// 是否允许选择图片，默认YES
+@property (nonatomic, assign, class) BOOL allowSelectImage;
 /// 是否允许选择视频，默认 NO
 @property (nonatomic, assign, class) BOOL allowSelectVideo;
 
