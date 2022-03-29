@@ -113,7 +113,8 @@ static NSInteger LZPhotoImageViewBaseTag = 1000;
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.userInteractionEnabled = YES;
-        imageView.clipsToBounds = YES;
+        imageView.layer.cornerRadius = 8.0f;
+        imageView.layer.masksToBounds = YES;
         imageView.tag = LZPhotoImageViewBaseTag + index;
         UITapGestureRecognizer *tap =
         [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewDidTap:)];
