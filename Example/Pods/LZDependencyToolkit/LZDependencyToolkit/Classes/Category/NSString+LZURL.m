@@ -16,6 +16,22 @@
 	NSMutableString *paraString = [NSMutableString string];
     [paraDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSObject *value, BOOL * _Nonnull stop) {
         if ([value isKindOfClass:[NSString class]] && [(NSString *)value isValidString]) {
+            
+            NSArray *components = [(NSString *)value componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if (components && components.count) {
+                
+                NSMutableString *componentsStrM = [NSMutableString string];
+                for (NSString *component in components) {
+                    if (component && component.length) {
+                        
+                        NSString *string = [component stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                        if (string && string.length) {
+                            [componentsStrM appendString:string];
+                        }
+                    }
+                }
+                value = [componentsStrM copy];
+            }
             [paraString appendFormat:@"%@=%@&", key, value];
         } else {
             [paraString appendFormat:@"%@=%@&", key, value.description];
@@ -34,13 +50,15 @@
     
     NSCharacterSet *queryCharacterSet = [NSCharacterSet URLQueryAllowedCharacterSet];
     paraString = [paraString stringByAddingPercentEncodingWithAllowedCharacters:queryCharacterSet];
-    // 去掉前后空格
     NSString *urlString = self;
+    // 去掉前后空格
     urlString = [urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     // 特殊处理：兼容 H5 的路由规则
     NSString *regx = @"/#{1,1}.{0,}/";
     NSRange range = [urlString rangeOfString:regx options:NSRegularExpressionSearch];
     if (range.location == NSNotFound) {
+        // 编码前，先解码，防止二次编码
+        urlString = [urlString stringByRemovingPercentEncoding];
         urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:queryCharacterSet];
     }
     // 拼接参数

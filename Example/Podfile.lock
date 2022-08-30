@@ -1,38 +1,38 @@
 PODS:
-  - LZDependencyToolkit (2.5.0):
-    - LZDependencyToolkit/Category (= 2.5.0)
-    - LZDependencyToolkit/Define (= 2.5.0)
-    - LZDependencyToolkit/Object (= 2.5.0)
-    - LZDependencyToolkit/Struct (= 2.5.0)
-  - LZDependencyToolkit/Category (2.5.0):
+  - LZDependencyToolkit (2.5.7):
+    - LZDependencyToolkit/Category (= 2.5.7)
+    - LZDependencyToolkit/Define (= 2.5.7)
+    - LZDependencyToolkit/Object (= 2.5.7)
+    - LZDependencyToolkit/Struct (= 2.5.7)
+  - LZDependencyToolkit/Category (2.5.7):
     - MJRefresh
-  - LZDependencyToolkit/Define (2.5.0)
-  - LZDependencyToolkit/Object (2.5.0):
-    - LZDependencyToolkit/Object/Proxy (= 2.5.0)
-    - LZDependencyToolkit/Object/Thread (= 2.5.0)
-    - LZDependencyToolkit/Object/Timer (= 2.5.0)
-    - LZDependencyToolkit/Object/Transitioning (= 2.5.0)
-  - LZDependencyToolkit/Object/Proxy (2.5.0)
-  - LZDependencyToolkit/Object/Thread (2.5.0)
-  - LZDependencyToolkit/Object/Timer (2.5.0)
-  - LZDependencyToolkit/Object/Transitioning (2.5.0)
-  - LZDependencyToolkit/Struct (2.5.0):
-    - LZDependencyToolkit/Struct/AppUnit (= 2.5.0)
-    - LZDependencyToolkit/Struct/CryptoUnit (= 2.5.0)
-    - LZDependencyToolkit/Struct/DeviceUnit (= 2.5.0)
-    - LZDependencyToolkit/Struct/QuickUnit (= 2.5.0)
-  - LZDependencyToolkit/Struct/AppUnit (2.5.0)
-  - LZDependencyToolkit/Struct/CryptoUnit (2.5.0)
-  - LZDependencyToolkit/Struct/DeviceUnit (2.5.0)
-  - LZDependencyToolkit/Struct/QuickUnit (2.5.0)
-  - LZPhotoBrowser (0.2.5):
+  - LZDependencyToolkit/Define (2.5.7)
+  - LZDependencyToolkit/Object (2.5.7):
+    - LZDependencyToolkit/Object/Proxy (= 2.5.7)
+    - LZDependencyToolkit/Object/Thread (= 2.5.7)
+    - LZDependencyToolkit/Object/Timer (= 2.5.7)
+    - LZDependencyToolkit/Object/Transitioning (= 2.5.7)
+  - LZDependencyToolkit/Object/Proxy (2.5.7)
+  - LZDependencyToolkit/Object/Thread (2.5.7)
+  - LZDependencyToolkit/Object/Timer (2.5.7)
+  - LZDependencyToolkit/Object/Transitioning (2.5.7)
+  - LZDependencyToolkit/Struct (2.5.7):
+    - LZDependencyToolkit/Struct/AppUnit (= 2.5.7)
+    - LZDependencyToolkit/Struct/CryptoUnit (= 2.5.7)
+    - LZDependencyToolkit/Struct/DeviceUnit (= 2.5.7)
+    - LZDependencyToolkit/Struct/QuickUnit (= 2.5.7)
+  - LZDependencyToolkit/Struct/AppUnit (2.5.7)
+  - LZDependencyToolkit/Struct/CryptoUnit (2.5.7)
+  - LZDependencyToolkit/Struct/DeviceUnit (2.5.7)
+  - LZDependencyToolkit/Struct/QuickUnit (2.5.7)
+  - LZPhotoBrowser (0.2.6):
     - LZDependencyToolkit
     - SDWebImage
     - ZLPhotoBrowser
-  - MJRefresh (3.6.1)
-  - SDWebImage (5.11.1):
-    - SDWebImage/Core (= 5.11.1)
-  - SDWebImage/Core (5.11.1)
+  - MJRefresh (3.7.2)
+  - SDWebImage (5.12.1):
+    - SDWebImage/Core (= 5.12.1)
+  - SDWebImage/Core (5.12.1)
   - ZLPhotoBrowser (3.2.0):
     - SDWebImage
 
@@ -51,12 +51,12 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  LZDependencyToolkit: 935264d036983f0192f5fd8b64c3bfef231695a6
-  LZPhotoBrowser: b97459084d911bd431f54dc07af843d87bc90c21
-  MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
-  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  LZDependencyToolkit: d30f96f9e8df914ba7a89d129f112f2dcd8f2107
+  LZPhotoBrowser: 52c0a68cd5887796abc59a6d180c75da9dcc3f1e
+  MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
 
 PODFILE CHECKSUM: 351b0abbde0391f1733013e746cdc086bc478a65
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
