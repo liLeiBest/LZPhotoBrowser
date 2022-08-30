@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *watermarkText;
 /// 大图
 @property (nonatomic, strong) UIImage *previewImg;
+/// 大图地址
+@property (nonatomic, strong) NSURL *previewImgURL;
 /// 大图索引
 @property (nonatomic, strong) NSIndexPath *previewImgIndexPath;
 /// 大图长按事件列表

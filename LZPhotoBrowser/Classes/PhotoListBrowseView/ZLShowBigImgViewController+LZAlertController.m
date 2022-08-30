@@ -8,6 +8,7 @@
 #import "ZLShowBigImgViewController+LZAlertController.h"
 #import "LZPhotoBrowserAppearanceModel.h"
 #import <ZLPhotoBrowser/ZLBigImageCell.h>
+#import <ZLPhotoBrowser/ZLPhotoModel.h>
 
 @implementation ZLShowBigImgViewController (LZAlertController)
 
@@ -36,6 +37,7 @@
                     UIImage *previewImg = cell.previewView.image;
                     NSIndexPath *indexPath = [collection indexPathForCell:cell];
                     PhotoBrowserAppearanceConfig().previewImg = previewImg;
+                    PhotoBrowserAppearanceConfig().previewImgURL = cell.model.url;
                     PhotoBrowserAppearanceConfig().previewImgIndexPath = indexPath;
                     break;
                 }
