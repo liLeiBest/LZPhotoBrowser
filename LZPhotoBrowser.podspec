@@ -36,6 +36,9 @@ Pod::Spec.new do |s|
     s.dependency 'SDWebImage'
 
     # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+    s.pod_target_xcconfig     = {
+      'OTHER_LDFLAGS' => '-lObjC'
+    }
     # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
     # s.dependency "JSONKit", "~> 1.4"
 	

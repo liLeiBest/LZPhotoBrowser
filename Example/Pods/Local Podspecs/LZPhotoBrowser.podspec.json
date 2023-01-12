@@ -44,5 +44,8 @@
 
     ]
   },
+  "pod_target_xcconfig": {
+    "OTHER_LDFLAGS": "-lObjC"
+  },
   "prefix_header_contents": "static NSString * const LZPhotoBrowserBundle = @\"LZPhotoBrowserResourceBundle\";\n#import <LZDependencyToolkit/LZDependencyToolkit.h>"
 }
