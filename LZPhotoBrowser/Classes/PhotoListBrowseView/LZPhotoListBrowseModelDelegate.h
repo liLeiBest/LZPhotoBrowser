@@ -13,10 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 原图
 @property (nonatomic, strong) NSURL *photoURL;
+
+@optional
 /// 缩略图
 @property (nonatomic, strong) NSURL *thumbnailPhotoURL;
 /// 占位图
 @property (nonatomic, strong) UIImage *placeholderImg;
+/// 扩展对象，可以用于视频对象
+@property (nonatomic, strong) NSObject *extend;
 
 @end
 

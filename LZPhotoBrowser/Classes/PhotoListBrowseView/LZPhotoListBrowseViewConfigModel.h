@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) CGFloat height;
 /// Frame 数组
 @property (nonatomic, strong, readonly) NSArray *frameDataSource;
+/** 视频播放回调 */
+@property (nonatomic, copy) void(^videoPlayDidClick)(id videoModel);
 /// 设置图片最大展示张数，默认 4
 - (LZPhotoListBrowseViewConfigModel * (^)(NSUInteger))maxShowCountSet;
 /// 设置图片实际张数，默认 4
