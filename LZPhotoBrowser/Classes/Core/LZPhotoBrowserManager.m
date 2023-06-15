@@ -125,7 +125,7 @@ UIColor *configThemeColor(UIColor *color) {
     actionSheet.configuration.allowSelectVideo = self.allowSelectVideo;
     actionSheet.configuration.mutuallyExclusiveSelectInMix = YES;
     actionSheet.configuration.allowSelectGif = NO;
-    actionSheet.configuration.allowSelectLivePhoto = NO;
+    actionSheet.configuration.allowSelectLivePhoto = YES;
     actionSheet.configuration.allowForceTouch = YES;
     actionSheet.configuration.allowEditImage = YES;
     actionSheet.configuration.hideClipRatiosToolBar = YES;
