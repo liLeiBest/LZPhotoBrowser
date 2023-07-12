@@ -47,6 +47,19 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
     return newImage;
 }
 
+static inline CGSize SDCalculateScaleDownPixelSize(NSUInteger limitBytes, CGSize originalSize, NSUInteger frameCount, NSUInteger bytesPerPixel) {
+    if (CGSizeEqualToSize(originalSize, CGSizeZero)) return CGSizeMake(1, 1);
+    NSUInteger totalFramePixelSize = limitBytes / bytesPerPixel / (frameCount ?: 1);
+    CGFloat ratio = originalSize.height / originalSize.width;
+    CGFloat width = sqrt(totalFramePixelSize / ratio);
+    CGFloat height = width * ratio;
+    width = MAX(1, floor(width));
+    height = MAX(1, floor(height));
+    CGSize size = CGSizeMake(width, height);
+    
+    return size;
+}
+
 @interface SDImageIOCoderFrame : NSObject
 
 @property (nonatomic, assign) NSUInteger index; // Frame index (zero based)
@@ -70,6 +83,7 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
     BOOL _finished;
     BOOL _preserveAspectRatio;
     CGSize _thumbnailSize;
+    NSUInteger _limitBytes;
     BOOL _lazyDecode;
 }
 
@@ -409,22 +423,41 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, (__bridge CFDictionaryRef)creatingOptions);
     if (!source) {
         // Try again without UTType hint, the call site from user may provide the wrong UTType
-        source = CGImageSourceCreateWithData((__bridge CFDataRef)data, (__bridge CFDictionaryRef)creatingOptions);
+        source = CGImageSourceCreateWithData((__bridge CFDataRef)data, nil);
     }
     if (!source) {
         return nil;
     }
     
-    size_t count = CGImageSourceGetCount(source);
+    size_t frameCount = CGImageSourceGetCount(source);
     UIImage *animatedImage;
     
+    NSUInteger limitBytes = 0;
+    NSNumber *limitBytesValue = options[SDImageCoderDecodeScaleDownLimitBytes];
+    if (limitBytesValue != nil) {
+        limitBytes = limitBytesValue.unsignedIntegerValue;
+    }
+    // Parse the image properties
+    NSDictionary *properties = (__bridge_transfer NSDictionary *)CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
+    size_t width = [properties[(__bridge NSString *)kCGImagePropertyPixelWidth] doubleValue];
+    size_t height = [properties[(__bridge NSString *)kCGImagePropertyPixelHeight] doubleValue];
+    // Scale down to limit bytes if need
+    if (limitBytes > 0) {
+        // Hack since ImageIO public API (not CGImageDecompressor/CMPhoto) always return back RGBA8888 CGImage
+        CGSize imageSize = CGSizeMake(width, height);
+        CGSize framePixelSize = SDCalculateScaleDownPixelSize(limitBytes, imageSize, frameCount, 4);
+        // Override thumbnail size
+        thumbnailSize = framePixelSize;
+        preserveAspectRatio = YES;
+    }
+    
     BOOL decodeFirstFrame = [options[SDImageCoderDecodeFirstFrameOnly] boolValue];
-    if (decodeFirstFrame || count <= 1) {
+    if (decodeFirstFrame || frameCount <= 1) {
         animatedImage = [self.class createFrameAtIndex:0 source:source scale:scale preserveAspectRatio:preserveAspectRatio thumbnailSize:thumbnailSize lazyDecode:lazyDecode animatedImage:NO];
     } else {
-        NSMutableArray<SDImageFrame *> *frames = [NSMutableArray arrayWithCapacity:count];
+        NSMutableArray<SDImageFrame *> *frames = [NSMutableArray arrayWithCapacity:frameCount];
         
-        for (size_t i = 0; i < count; i++) {
+        for (size_t i = 0; i < frameCount; i++) {
             UIImage *image = [self.class createFrameAtIndex:i source:source scale:scale preserveAspectRatio:preserveAspectRatio thumbnailSize:thumbnailSize lazyDecode:lazyDecode animatedImage:NO];
             if (!image) {
                 continue;
@@ -481,6 +514,12 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
             preserveAspectRatio = preserveAspectRatioValue.boolValue;
         }
         _preserveAspectRatio = preserveAspectRatio;
+        NSUInteger limitBytes = 0;
+        NSNumber *limitBytesValue = options[SDImageCoderDecodeScaleDownLimitBytes];
+        if (limitBytesValue != nil) {
+            limitBytes = limitBytesValue.unsignedIntegerValue;
+        }
+        _limitBytes = limitBytes;
         BOOL lazyDecode = NO; // Defaults NO for animated image coder
         NSNumber *lazyDecodeValue = options[SDImageCoderDecodeUseLazyDecoding];
         if (lazyDecodeValue != nil) {
@@ -524,6 +563,16 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
     // For animated image progressive decoding because the frame count and duration may be changed.
     [self scanAndCheckFramesValidWithImageSource:_imageSource];
     SD_UNLOCK(_lock);
+    
+    // Scale down to limit bytes if need
+    if (_limitBytes > 0) {
+        // Hack since ImageIO public API (not CGImageDecompressor/CMPhoto) always return back RGBA8888 CGImage
+        CGSize imageSize = CGSizeMake(_width, _height);
+        CGSize framePixelSize = SDCalculateScaleDownPixelSize(_limitBytes, imageSize, _frameCount, 4);
+        // Override thumbnail size
+        _thumbnailSize = framePixelSize;
+        _preserveAspectRatio = YES;
+    }
 }
 
 - (UIImage *)incrementalDecodedImageWithOptions:(SDImageCoderOptions *)options {
@@ -555,19 +604,31 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
     if (!image) {
         return nil;
     }
+    if (format != self.class.imageFormat) {
+        return nil;
+    }
+    
+    NSArray<SDImageFrame *> *frames = [SDImageCoderHelper framesFromAnimatedImage:image];
+    if (!frames || frames.count == 0) {
+        SDImageFrame *frame = [SDImageFrame frameWithImage:image duration:0];
+        frames = @[frame];
+    }
+    return [self encodedDataWithFrames:frames loopCount:image.sd_imageLoopCount format:format options:options];
+}
+
+- (NSData *)encodedDataWithFrames:(NSArray<SDImageFrame *> *)frames loopCount:(NSUInteger)loopCount format:(SDImageFormat)format options:(SDImageCoderOptions *)options {
+    UIImage *image = frames.firstObject.image; // Primary image
+    if (!image) {
+        return nil;
+    }
     CGImageRef imageRef = image.CGImage;
     if (!imageRef) {
         // Earily return, supports CGImage only
         return nil;
     }
     
-    if (format != self.class.imageFormat) {
-        return nil;
-    }
-    
     NSMutableData *imageData = [NSMutableData data];
     CFStringRef imageUTType = [NSData sd_UTTypeFromImageFormat:format];
-    NSArray<SDImageFrame *> *frames = [SDImageCoderHelper framesFromAnimatedImage:image];
     
     // Create an image destination. Animated Image does not support EXIF image orientation TODO
     // The `CGImageDestinationCreateWithData` will log a warning when count is 0, use 1 instead.
@@ -630,12 +691,11 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
     properties[(__bridge NSString *)kCGImageDestinationEmbedThumbnail] = @(embedThumbnail);
     
     BOOL encodeFirstFrame = [options[SDImageCoderEncodeFirstFrameOnly] boolValue];
-    if (encodeFirstFrame || frames.count == 0) {
+    if (encodeFirstFrame || frames.count <= 1) {
         // for static single images
         CGImageDestinationAddImage(imageDestination, imageRef, (__bridge CFDictionaryRef)properties);
     } else {
         // for animated images
-        NSUInteger loopCount = image.sd_imageLoopCount;
         NSDictionary *containerProperties = @{
             self.class.dictionaryProperty: @{self.class.loopCountProperty : @(loopCount)}
         };
@@ -699,6 +759,25 @@ static CGImageRef __nullable SDCGImageCreateCopy(CGImageRef cg_nullable image) {
             preserveAspectRatio = preserveAspectRatioValue.boolValue;
         }
         _preserveAspectRatio = preserveAspectRatio;
+        NSUInteger limitBytes = 0;
+        NSNumber *limitBytesValue = options[SDImageCoderDecodeScaleDownLimitBytes];
+        if (limitBytesValue != nil) {
+            limitBytes = limitBytesValue.unsignedIntegerValue;
+        }
+        _limitBytes = limitBytes;
+        // Parse the image properties
+        NSDictionary *properties = (__bridge_transfer NSDictionary *)CGImageSourceCopyPropertiesAtIndex(imageSource, 0, NULL);
+        _width = [properties[(__bridge NSString *)kCGImagePropertyPixelWidth] doubleValue];
+        _height = [properties[(__bridge NSString *)kCGImagePropertyPixelHeight] doubleValue];
+        // Scale down to limit bytes if need
+        if (_limitBytes > 0) {
+            // Hack since ImageIO public API (not CGImageDecompressor/CMPhoto) always return back RGBA8888 CGImage
+            CGSize imageSize = CGSizeMake(_width, _height);
+            CGSize framePixelSize = SDCalculateScaleDownPixelSize(_limitBytes, imageSize, _frameCount, 4);
+            // Override thumbnail size
+            _thumbnailSize = framePixelSize;
+            _preserveAspectRatio = YES;
+        }
         BOOL lazyDecode = NO; // Defaults NO for animated image coder
         NSNumber *lazyDecodeValue = options[SDImageCoderDecodeUseLazyDecoding];
         if (lazyDecodeValue != nil) {
