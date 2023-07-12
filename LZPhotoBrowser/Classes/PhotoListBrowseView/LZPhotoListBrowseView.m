@@ -105,6 +105,8 @@ static NSInteger LZPhotoImageViewBaseTag = 1000;
                 }
                 if (nil != photoURL) {
                     [imgURLDataSource addObject:photoURL];
+                } else {
+                    [imgURLDataSource addObject:[NSURL URLWithString:@"LZPicturePlaceholder"]];
                 }
             }
             id sender = self.config.sender ?: self.viewController;
