@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
     s.social_media_url = 'https://github.com/liLeiBest'
     s.source        = { :git => 'https://github.com/liLeiBest/LZPhotoBrowser.git', :tag => s.version.to_s }
     s.requires_arc  = true
-    s.platform      = :ios, '9.0'
+    s.platform      = :ios, '11.0'
     s.frameworks    = 'Foundation', 'UIKit', 'Photos'
 
     # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

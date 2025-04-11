@@ -26,7 +26,7 @@
     
     LZPhotoListPickerViewController *ctr = [LZPhotoListPickerViewController instance];
     ctr.insets = UIEdgeInsetsMake(0, 20, 0, 20);
-    ctr.selectedList = @[[NSURL URLWithString:@"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1606318581,1963634275&fm=26&gp=0.jpg"], [NSURL URLWithString:@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3632840947,546420089&fm=26&gp=0.jpg"], [NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596628910178&di=2968b3dde42f4de93b18c6090a34f579&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D2857883419%2C1187496708%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1280%26h%3D763"], [NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596629071833&di=44ebc6ecd236d10a0bacdaf62699346c&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201506%2F05%2F20150605194427_mEXU2.jpeg"], [NSURL URLWithString:@"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2154892101,3660422198&fm=26&gp=0.jpg"], [NSURL URLWithString:@"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3633842791,3677476825&fm=26&gp=0.jpg"]];
+    ctr.selectedList = @[[NSURL URLWithString:@"http://gips3.baidu.com/it/u=3557221034,1819987898&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960"], [NSURL URLWithString:@"http://gips1.baidu.com/it/u=1746086795,2510875842&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024"], [NSURL URLWithString:@"http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024"], [NSURL URLWithString:@"http://gips0.baidu.com/it/u=2298867753,3464105574&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280"], [NSURL URLWithString:@"http://gips2.baidu.com/it/u=295419831,2920259701&fm=3028&app=3028&f=JPEG&fmt=auto?w=720&h=1280"], [NSURL URLWithString:@"https://gips0.baidu.com/it/u=2946692232,559515331&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f960_1280"]];
     ctr.selectPhotoListDidChangeCallback = ^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, CGFloat totalHeight) {
         NSLog(@"选择的图片:%@\n%@", images, assets);
     };
@@ -43,10 +43,12 @@
 - (IBAction)photoesBrowseDidTouch:(id)sender {
     
     NSArray *photos = @[
-    @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596628910178&di=2968b3dde42f4de93b18c6090a34f579&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D2857883419%2C1187496708%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1280%26h%3D763",
-    @"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1606318581,1963634275&fm=26&gp=0.jpg",
-    @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1596629071833&di=44ebc6ecd236d10a0bacdaf62699346c&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201506%2F05%2F20150605194427_mEXU2.jpeg",
-    @"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3632840947,546420089&fm=26&gp=0.jpg"
+    @"http://gips3.baidu.com/it/u=3557221034,1819987898&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960",
+    @"http://gips1.baidu.com/it/u=1746086795,2510875842&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024",
+    @"http://gips2.baidu.com/it/u=3944689179,983354166&fm=3028&app=3028&f=JPEG&fmt=auto?w=1024&h=1024",
+    @"http://gips0.baidu.com/it/u=2298867753,3464105574&fm=3028&app=3028&f=JPEG&fmt=auto?w=960&h=1280",
+    @"http://gips2.baidu.com/it/u=295419831,2920259701&fm=3028&app=3028&f=JPEG&fmt=auto?w=720&h=1280",
+    @"https://gips0.baidu.com/it/u=2946692232,559515331&fm=3028&app=3028&f=JPEG&fmt=auto&q=100&size=f960_1280"
     ];
     NSMutableArray *arrM = [NSMutableArray arrayWithArray:photos];
     for (NSInteger i = 1; i < 6; i++) {

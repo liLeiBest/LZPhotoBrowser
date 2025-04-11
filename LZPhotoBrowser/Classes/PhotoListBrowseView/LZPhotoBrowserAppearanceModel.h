@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 大图
 @property (nonatomic, strong) UIImage *previewImg;
 /// 大图地址
-@property (nonatomic, strong) NSURL *previewImgURL;
+@property (nonatomic, strong) NSURL * __nullable previewImgURL;
 /// 大图索引
 @property (nonatomic, strong) NSIndexPath *previewImgIndexPath;
 /// 大图长按事件列表

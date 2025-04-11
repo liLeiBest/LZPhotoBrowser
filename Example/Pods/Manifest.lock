@@ -29,18 +29,19 @@ PODS:
     - LZDependencyToolkit
     - SDWebImage
     - ZLPhotoBrowser
-  - MJRefresh (3.7.5)
-  - SDWebImage (5.16.0):
-    - SDWebImage/Core (= 5.16.0)
-  - SDWebImage/Core (5.16.0)
-  - ZLPhotoBrowser (3.2.0):
-    - SDWebImage
+  - MJRefresh (3.7.6)
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
+  - ZLPhotoBrowser (4.6.0.1):
+    - ZLPhotoBrowser/Core (= 4.6.0.1)
+  - ZLPhotoBrowser/Core (4.6.0.1)
 
 DEPENDENCIES:
   - LZPhotoBrowser (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - LZDependencyToolkit
     - MJRefresh
     - SDWebImage
@@ -52,11 +53,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   LZDependencyToolkit: 25364f8746bbc9e51c6cedb43bba39bd2025be05
-  LZPhotoBrowser: 1d7b5a4bdff04adfee9c8c27f8a31e8ab27013ff
-  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
-  SDWebImage: 2aea163b50bfcb569a2726b6a754c54a4506fcf6
-  ZLPhotoBrowser: 3748fdbeb2b28961c2495d15131dbf413082e1b9
+  LZPhotoBrowser: 073242ef5945283fc0837f20f2929b81dd628c61
+  MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  ZLPhotoBrowser: 20f32e6429448cc1c008795a1b55472d5772939c
 
-PODFILE CHECKSUM: 351b0abbde0391f1733013e746cdc086bc478a65
+PODFILE CHECKSUM: b32e5b966dc7e0f22901ae5016e611053232a244
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.16.2
